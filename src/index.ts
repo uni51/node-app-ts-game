@@ -1,3 +1,5 @@
+type Mode = 'normal' | 'hard' // ユニオン型
+
 const printLine = (text: string, breakLine: boolean = true) => {
   process.stdout.write(text + ( breakLine ? '\n' : ''))
 }
@@ -15,9 +17,9 @@ class HitAndBlow {
   private readonly answerSource = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
   private answer: string[] = []
   private tryCount = 0
-  private mode: 'normal' | 'hard' // ユニオン型
+  private mode: Mode
   
-  constructor(mode: 'normal' | 'hard') {
+  constructor(mode: Mode) {
     this.mode = mode
   }
 
