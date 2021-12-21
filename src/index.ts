@@ -14,7 +14,7 @@ const promptInput = async (text: string) => {
   return readline()
 }
 
-const promptSelect = async (text:string, values: readonly string[]): Promise<string> => {
+const promptSelect = async <T>(text:string, values: readonly T[]): Promise<T> => {
   printLine(`\n${text}`)
   values.forEach((value) => {
     printLine(`- ${value}`)
@@ -25,7 +25,7 @@ const promptSelect = async (text:string, values: readonly string[]): Promise<str
   if (values.includes(input)) {
     return input
   } else {
-    return promptSelect(text, values)
+    return promptSelect<T>(text, values)
   }
 }
 
@@ -36,7 +36,7 @@ class HitAndBlow {
   private mode: Mode = 'normal'
 
   async setting() {
-    this.mode = await promptSelect('モードを入力してください。', ['normal', 'hard']) as Mode
+    this.mode = await promptSelect<Mode>('モードを入力してください。', ['normal', 'hard'])
     const answerLength = this.getAnswerLength()
 
     while(this.answer.length < answerLength) {
